@@ -1,0 +1,6 @@
+/pages/* https://learn.wsdalearning.ai/pages/:splat 301
+/users/* https://learn.wsdalearning.ai/users/:splat 301
+/enroll/* https://learn.wsdalearning.ai/enroll/:splat 301
+/manage/* https://learn.wsdalearning.ai/manage/:splat 301
+/courses/* https://learn.wsdalearning.ai/courses/:splat 301
+/bundles/* https://learn.wsdalearning.ai/bundles/:splat 301
