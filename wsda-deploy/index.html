@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Google Tag Manager. Replace GTM-XXXXXXX with the WSDA container ID; it stays inert until then. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    (function(w,d,s,l,i){if(/X{4}/.test(i))return;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End Google Tag Manager -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Walter Shields Data Academy | AI-Enabled Modern Analyst Education</title>
   <meta name="description" content="Learn to think like a modern data analyst. Walter Shields teaches AI-enabled analytics workflows, SQL with AI, and the PVC methodology trusted by 526,000+ professionals. Free tools. Real workflows. No syntax memorization." />
@@ -192,6 +198,17 @@
     .logos-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
     .logos-list { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
     .logo-co { font-size: 0.82rem; color: rgba(0,0,0,0.22); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-family: var(--font-display); }
+
+    /* AUDIENCE SPLIT */
+    .audience { background: var(--white); border-bottom: 1px solid rgba(0,0,0,0.07); padding: 0 4%; }
+    .audience-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; }
+    .audience-item { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.75rem 2rem 1.75rem 0; text-decoration: none; color: inherit; }
+    .audience-item + .audience-item { border-left: 1px solid rgba(0,0,0,0.07); padding-left: 2rem; }
+    .audience-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+    .audience-item strong { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.2; display: block; }
+    .audience-arrow { font-family: var(--font-mono); font-size: 0.75rem; color: var(--green); white-space: nowrap; }
+    .audience-item:hover strong { color: var(--green-dim); }
+    @media (max-width:768px) { .audience-inner { grid-template-columns: 1fr; } .audience-item + .audience-item { border-left: none; border-top: 1px solid rgba(0,0,0,0.07); padding-left: 0; } }
 
     /* SECTION BASE */
     section { padding: 5.5rem 4%; }
@@ -494,6 +511,7 @@
   </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
 
 <!-- NAV -->
 <nav>
@@ -506,6 +524,7 @@
     <li><a href="https://www.wsdalearning.ai/about">About Walter</a></li>
     <li><a href="https://www.wsdalearning.ai/contact">Contact</a></li>
     <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="https://www.wsdalearning.ai/teams">For Teams</a></li>
     <li><a href="https://www.wsdalearning.ai/pages/ai-data-analyst" class="nav-cta">Get the Course</a></li>
   </ul>
 </nav>
@@ -552,6 +571,20 @@
     </div>
   </div>
 </section>
+
+<!-- AUDIENCE SPLIT -->
+<div class="audience">
+  <div class="audience-inner">
+    <a href="https://www.wsdalearning.ai/pages/ai-data-analyst" class="audience-item">
+      <span><span class="audience-label">For Professionals</span><strong>Build your own AI-integrated analyst skills</strong></span>
+      <span class="audience-arrow">Get the course &rarr;</span>
+    </a>
+    <a href="https://www.wsdalearning.ai/teams" class="audience-item">
+      <span><span class="audience-label">For Teams</span><strong>AI training for your data and analytics team</strong></span>
+      <span class="audience-arrow">Request a team pilot &rarr;</span>
+    </a>
+  </div>
+</div>
 
 <!-- LOGOS -->
 <div class="logos">
@@ -880,6 +913,7 @@
       <h4>Learn</h4>
       <ul>
         <li><a href="https://www.wsdalearning.ai/pages/ai-data-analyst">Data Analyst Learning Path</a></li>
+        <li><a href="https://www.wsdalearning.ai/teams">AI Training for Teams</a></li>
         <li><a href="https://www.linkedin.com/learning/sql-essential-training-20685933">SQL Essential Training</a></li>
         <li><a href="https://wsdalearning.ai">wsdalearning.ai</a></li>
       </ul>
