@@ -4,7 +4,3 @@
 /manage/* https://learn.wsdalearning.ai/manage/:splat 301
 /courses/* https://learn.wsdalearning.ai/courses/:splat 301
 /bundles/* https://learn.wsdalearning.ai/bundles/:splat 301
-
-# WSDA for Teams (rewrites keep query strings, so UTMs survive)
-/teams              /teams.html              200
-/teams/thank-you    /teams/thank-you.html    200
