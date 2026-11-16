@@ -14,9 +14,9 @@ The page is **not launch-ready until every item in section 1 is done**. Both the
 | 3 | **GTM container ID** (`GTM-XXXXXXX`) | tagmanager.google.com | Replace `GTM-XXXXXXX` in `software-coach.html` (2 spots). The same placeholder is still in `index.html`, `about.html`, `contact.html`, `teams.html`, `teams/thank-you.html`, so **no page on the site is measured today**. |
 | 4 | **GA4 Measurement ID** (`G-…`) | GA4 > Admin > Data streams > Web | Used by the Google tag inside GTM. |
 | 5 | **LinkedIn Insight Tag Partner ID** | Campaign Manager > Analyze > Insight Tag | Used by the LinkedIn tag inside GTM. |
-| 6 | Product footage | App Development 3 / screen recording | Hero loop + demo video. Replace the two `data-placeholder` figures (instructions in HTML comments). Real recordings only. |
+| 6 | Product footage | App Development 3 / screen recording | Hero loop, the featured 45–60 s demo, and the carousel demos (title + application name each). Replace the `data-placeholder` figures; instructions are in HTML comments. Add a carousel demo by copying one `<li class="demo-slide">`. Real recordings only, with captions. |
 | 7 | Privacy Policy, Terms of Use, Beta participation text | Legal / App Development 3 | Replace the placeholders in `software-coach/privacy.html`, `terms.html`, `beta.html`. Anything about screen data, AI processing, retention or security must be verified with App Development 3. |
-| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current, and whether the "sales report" and "first SQL query" requests work in the beta. They are shown as "Things you can ask", not as demonstrated results. |
+| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current, and that the four example requests in "Made for everyday moments" (first SQL query, sales report, finding settings, saving as PDF) and the chatbot comparison match the current beta. |
 
 ## 2. What the page sends
 
@@ -32,18 +32,20 @@ Klaviyo keeps one profile per email, so a repeat signup does not create a duplic
 | Event | When | Parameters |
 |---|---|---|
 | `coach_page_view` | page load | `page_type`, `utm_*`, `landing_page`, `referring_url` |
-| `coach_cta_click` | any primary CTA | `cta_id` (`nav_join_beta`, `hero_join_beta`, `form_submit`), `cta_text`, `cta_location` |
+| `coach_cta_click` | any primary CTA | `cta_id` (`nav_join_beta`, `hero_join_beta`, `hero_watch_demo`, `form_submit`), `cta_text`, `cta_location` |
 | `coach_form_start` | first interaction with the form | `form_id` |
 | `generate_lead` | **only after Klaviyo returns 2xx** | `form_id=software_coach_beta`, `lead_type=software_coach_beta`, `utm_*`, `landing_page`, `referring_url` |
 | `coach_signup_error` | a failed attempt | `error_type` (`invalid_email`, `not_configured`, `rate_limited`, `network`, `http_<status>`) |
+| `coach_video_play` | first play of a demo video | `video_id`, `video_title`, `video_app`, `video_location` (`featured` or `carousel`) |
+| `coach_video_complete` | a demo video plays to the end | same as above |
 
 `generate_lead` is shared with the Teams page; tell them apart with `lead_type` (`team_pilot` vs `software_coach_beta`).
 
 ## 3. GTM configuration
 
-Variables (Data Layer Variable v2): `cta_id`, `cta_text`, `cta_location`, `form_id`, `lead_type`, `error_type`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `landing_page`, `referring_url`.
+Variables (Data Layer Variable v2): `video_id`, `video_title`, `video_app`, `video_location`, `cta_id`, `cta_text`, `cta_location`, `form_id`, `lead_type`, `error_type`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `landing_page`, `referring_url`.
 
-Triggers (Custom Event): `coach_page_view`, `coach_cta_click`, `coach_form_start`, `generate_lead`, `coach_signup_error`. Add a second trigger **Software Coach lead** = Custom Event `generate_lead` where `lead_type` equals `software_coach_beta`.
+Triggers (Custom Event): `coach_page_view`, `coach_cta_click`, `coach_form_start`, `generate_lead`, `coach_signup_error`, `coach_video_play`, `coach_video_complete`. Add a second trigger **Software Coach lead** = Custom Event `generate_lead` where `lead_type` equals `software_coach_beta`.
 
 Tags:
 1. Google tag (GA4 Measurement ID), trigger Initialization - All Pages.
@@ -56,7 +58,7 @@ Publish, then in GTM Preview confirm: `coach_page_view` carries UTMs; `generate_
 ## 4. GA4 configuration
 
 1. Admin > Events: mark `generate_lead` as a **key event**.
-2. Admin > Custom definitions, event-scoped: `cta_id`, `cta_location`, `form_id`, `lead_type`, `error_type`.
+2. Admin > Custom definitions, event-scoped: `cta_id`, `cta_location`, `form_id`, `lead_type`, `error_type`, `video_id`, `video_title`, `video_app`, `video_location`.
 3. Primary metric (visitor → beta signup): Exploration filtered to page path `/software-coach`, users with `coach_page_view` vs users with `generate_lead` where `lead_type = software_coach_beta`, broken down by session source / medium / campaign.
 
 ## 5. End-to-end launch test

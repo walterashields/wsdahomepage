@@ -9,6 +9,8 @@
     coach_form_start     first interaction with the signup form, once per page load
     generate_lead        only after Klaviyo accepts the signup (lead_type=software_coach_beta)
     coach_signup_error   a signup attempt failed (error_type only)
+    coach_video_play     first play of a demo video (video_id, video_title, video_app, video_location)
+    coach_video_complete a demo video played to the end (same parameters)
 
   Signup goes to Klaviyo's client subscriptions endpoint, list set in the form's data-klaviyo-list.
 */
@@ -84,6 +86,64 @@
       setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 450);
     }
   });
+
+  // Demo videos: any <video> on the page reports play (once) and completion. Title and app come from
+  // data attributes on the video or its carousel slide.
+  Array.prototype.forEach.call(document.querySelectorAll("video"), function (v) {
+    if (v.autoplay && v.muted) return; // decorative loops are not demo views
+    var slide = v.closest ? v.closest(".demo-slide") : null;
+    var info = {
+      video_id: v.getAttribute("data-video-id") || (slide && slide.getAttribute("data-video-id")) || "",
+      video_title: v.getAttribute("data-video-title") || "",
+      video_app: v.getAttribute("data-video-app") || "",
+      video_location: slide ? "carousel" : "featured"
+    };
+    var played = false, completed = false;
+    v.addEventListener("play", function () {
+      if (played) return; played = true;
+      var e = { event: "coach_video_play" }; for (var k in info) e[k] = info[k]; dl.push(e);
+    });
+    v.addEventListener("ended", function () {
+      if (completed) return; completed = true;
+      var e = { event: "coach_video_complete" }; for (var k in info) e[k] = info[k]; dl.push(e);
+    });
+    // Only one demo plays at a time.
+    v.addEventListener("play", function () {
+      Array.prototype.forEach.call(document.querySelectorAll("video"), function (o) { if (o !== v && !o.paused && !(o.autoplay && o.muted)) o.pause(); });
+    });
+  });
+
+  // Carousel: arrows move one slide; counter and arrow state follow scrolling. Works with any number of slides.
+  var track = document.getElementById("demo-track");
+  if (track) {
+    var slidesEls = track.querySelectorAll(".demo-slide");
+    var prev = document.querySelector('.carousel-btn[data-dir="-1"]');
+    var next = document.querySelector('.carousel-btn[data-dir="1"]');
+    var count = document.querySelector(".carousel-count");
+    function step() { return slidesEls.length > 1 ? slidesEls[1].offsetLeft - slidesEls[0].offsetLeft : track.clientWidth; }
+    function update() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      var first = Math.round(track.scrollLeft / (step() || 1));
+      var visible = Math.max(1, Math.round(track.clientWidth / (step() || 1)));
+      var last = Math.min(slidesEls.length, first + visible);
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      if (count) count.textContent = slidesEls.length > visible ? (first + 1) + (last > first + 1 ? "–" + last : "") + " of " + slidesEls.length : "";
+    }
+    [prev, next].forEach(function (b) {
+      if (!b) return;
+      b.addEventListener("click", function () { track.scrollBy({ left: step() * Number(b.getAttribute("data-dir")), behavior: "smooth" }); });
+    });
+    track.addEventListener("keydown", function (e) {
+      if (e.target !== track) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); track.scrollBy({ left: step(), behavior: "smooth" }); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: -step(), behavior: "smooth" }); }
+    });
+    var t;
+    track.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(update, 60); }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
 
   if (!form || !input) return;
 
