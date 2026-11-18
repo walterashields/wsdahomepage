@@ -1,0 +1,5 @@
+# PRE-LAUNCH: keep Software Coach pages out of search until approved. Remove these two rules at launch.
+/software-coach
+  X-Robots-Tag: noindex, nofollow
+/software-coach/*
+  X-Robots-Tag: noindex, nofollow
