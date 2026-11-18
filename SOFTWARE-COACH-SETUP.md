@@ -16,9 +16,9 @@ The page is **not launch-ready until every item in section 1 is done**. Signup, 
 | 3 | **GTM container ID** (`GTM-XXXXXXX`) | tagmanager.google.com | Replace `GTM-XXXXXXX` in `software-coach.html` (2 spots). The same placeholder is still in `index.html`, `about.html`, `contact.html`, `teams.html`, `teams/thank-you.html`, so **no page on the site is measured today**. |
 | 4 | **GA4 Measurement ID** (`G-…`) | GA4 > Admin > Data streams > Web | Used by the Google tag inside GTM. |
 | 5 | **LinkedIn Insight Tag Partner ID** | Campaign Manager > Analyze > Insight Tag | Used by the LinkedIn tag inside GTM. |
-| 6 | Product footage | App Development 3 / screen recording | Hero: silent 10–15 s loop, 2:1, under 2.5 MB (MP4 + WebM) plus a poster JPG under 200 KB. Featured demo: 45–60 s, narrated, captioned (.vtt). Swap-in markup is in HTML comments next to each placeholder. More short demos later: uncomment the `more-demos` list in the demo section. Real recordings only, demo data only. |
+| 6 | Product footage | App Development 3 / screen recording | Hero: silent 8–12 s loop, 16:10, under 2.5 MB (MP4 + WebM) plus a poster JPG under 200 KB. Featured demo: 45–60 s, narrated, captioned (.vtt). Swap-in markup is in HTML comments next to each placeholder. More short demos later: uncomment the `more-demos` list in the demo section. Real recordings only, demo data only. |
 | 7 | Privacy Policy, Terms of Use, Beta participation text | Legal / App Development 3 | The three pages under `software-coach/` are marked **Draft · not yet published** and noindex. Replace with final text; anything about screen data, AI processing, retention or security must be verified with App Development 3. Then set `data-signups-open="true"`. |
-| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current and that the hero/"Meet" copy (ask for help, see where to click, you do the clicks) matches the current beta. |
+| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current and that the hero/"Meet" copy and the three hero captions ("you ask", "Coach shows you where", "you've got it!") match the current beta and the final hero clip. |
 
 ## 2. What the page sends
 

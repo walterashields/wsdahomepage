@@ -31,7 +31,7 @@
   <link rel="icon" type="image/png" href="/assets/software-coach/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Caveat:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/software-coach/coach.css" />
 </head>
 <body data-page="software-coach">
@@ -40,90 +40,104 @@
 <!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- Navy bar so the official white WSDA logo is used unaltered. -->
 <header class="site-nav">
+  <!-- Navy version of the official WSDA logo, for the cream background. -->
   <a href="https://wsdalearning.ai/" class="nav-logo">
-    <img src="/assets/software-coach/wsda-logo.png" alt="Walter Shields Data Academy home" width="133" height="56" />
+    <img src="/assets/software-coach/wsda-logo-navy.png" alt="Walter Shields Data Academy home" width="110" height="46" />
   </a>
-  <a href="#join" class="btn btn-primary btn-sm" data-cta-id="nav_join_beta" data-cta-location="nav">Join the Free Beta</a>
+  <div class="nav-right">
+    <span class="nav-pill">Free beta for macOS</span>
+    <a href="#join" class="btn btn-navy btn-sm" data-cta-id="nav_join_beta" data-cta-location="nav">Join the Free Beta</a>
+  </div>
 </header>
 
 <main id="main">
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap center">
-      <p class="pill"><span class="dot" aria-hidden="true"></span>WSDA Software Coach &middot; Free beta for macOS</p>
-      <h1 id="hero-title">Ever wish someone could just <em>show you how?</em></h1>
-      <p class="hero-sub">Meet WSDA Software Coach. Your personal software expert, right beside you. Ask for help, and Coach guides you through the steps, right on your screen.</p>
+    <div class="hero-copy">
+      <h1 id="hero-title">Ever wish someone could just <span class="hl">show you how?</span></h1>
+      <p class="hero-p">You're in an app. You're trying to get something done. And you can't figure out where to go next.</p>
+      <p class="hero-p"><strong>Meet WSDA Software Coach.</strong> Your personal software expert, right beside you. Ask for help, and Coach guides you through the steps, right on your screen.</p>
       <div class="actions">
-        <a href="#join" class="btn btn-primary" data-cta-id="hero_join_beta" data-cta-location="hero">Join the Free Beta</a>
-        <a href="#demo" class="btn btn-outline" data-cta-id="hero_see_how" data-cta-location="hero">
+        <a href="#join" class="btn btn-green" data-cta-id="hero_join_beta" data-cta-location="hero">Join the Free Beta</a>
+        <a href="#demo" class="btn btn-white" data-cta-id="hero_see_how" data-cta-location="hero">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5.5 3.5-5.5 3.5z" fill="currentColor"/></svg>
           See how it works
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <p class="mac-note">Currently available for macOS beta testing.</p>
+      <p class="mac-note">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M1 19h22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Currently available for macOS beta testing.
+      </p>
     </div>
 
-    <div class="wrap wide">
-      <!--
-        HERO FOOTAGE (real recording only). 10-15 s, silent, 2:1, < 2.5 MB. Replace the .placeholder div with:
-          <video class="hero-video" autoplay muted loop playsinline preload="auto"
-                 poster="/assets/software-coach/hero-poster.jpg" aria-label="Software Coach guiding a task inside an app">
-            <source src="/assets/software-coach/hero.webm" type="video/webm" />
-            <source src="/assets/software-coach/hero.mp4" type="video/mp4" />
-          </video>
-        and remove the hidden attribute from the pause button. coach.js handles pause/play and reduced motion.
-      -->
-      <figure class="frame hero-frame">
+    <!-- Hero visual: real recording in a tilted window, with handwritten captions that follow the clip. -->
+    <div class="hero-visual">
+      <p class="note note-1" aria-hidden="true">1. you ask</p>
+      <p class="note note-2" aria-hidden="true">2. Coach shows <br />you where</p>
+      <p class="note note-3" aria-hidden="true">3. you've got it!</p>
+      <figure class="window">
+        <div class="window-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <!--
+          HERO FOOTAGE (real recording only). Silent 8-12 s loop, 16:10, < 2.5 MB. Replace the .placeholder div with:
+            <video class="hero-video" autoplay muted loop playsinline preload="auto"
+                   poster="/assets/software-coach/hero-poster.jpg" aria-label="Software Coach guiding someone through a task in an app">
+              <source src="/assets/software-coach/hero.webm" type="video/webm" />
+              <source src="/assets/software-coach/hero.mp4" type="video/mp4" />
+            </video>
+          coach.js shows the pause button and handles reduced motion automatically.
+        -->
         <div class="placeholder">
           <span class="ph-label">Placeholder &middot; real recording</span>
-          <span class="ph-title">A real beta user's screen as Coach guides them through a task</span>
-          <span class="ph-note">Silent 10&ndash;15 second loop</span>
+          <span class="ph-title">A real person asks Coach for help, and Coach guides them inside the app</span>
+          <span class="ph-note">Silent 8&ndash;12 second loop from the beta. Captions around it follow the clip.</span>
         </div>
         <button type="button" class="video-toggle" aria-label="Pause video" hidden>
           <svg class="i-pause" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14M16 5v14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
           <svg class="i-play" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
         </button>
-        <figcaption class="visually-hidden">Recording of Software Coach guiding someone through a task.</figcaption>
+        <figcaption class="visually-hidden">You ask, Coach shows you where, and you've got it.</figcaption>
       </figure>
-      <ol class="moments">
-        <li><span class="m-num">01</span>You ask a question</li>
-        <li><span class="m-num">02</span>Coach points the way</li>
-        <li class="last"><span class="m-num">03</span>It clicks, and it's done</li>
-      </ol>
     </div>
   </section>
 
-  <!-- 1. WE'VE ALL BEEN THERE -->
+  <!-- 1. THE FAMILIAR FRUSTRATION -->
   <section class="frustration" aria-labelledby="been-there">
-    <div class="wrap">
-      <h2 id="been-there" class="kicker">We've all been there.</h2>
-      <p class="big-line muted">You're in an app.</p>
-      <p class="big-line muted">You're trying to get something done.</p>
-      <p class="big-line">And you can't figure out where to go next.</p>
-      <ul class="thoughts">
+    <div class="wrap center">
+      <h2 id="been-there" class="script coral">We've all been there.</h2>
+      <ul class="bubbles">
         <li>&ldquo;Where did that button go?&rdquo;</li>
         <li>&ldquo;I know it can do this. Somewhere.&rdquo;</li>
         <li>&ldquo;Guess I'll search for another tutorial.&rdquo;</li>
       </ul>
-      <p class="bridge">What you really want is someone who knows the app to lean over and <span class="warm">just show you.</span></p>
+      <p class="bridge">What you really want is someone who knows the app to lean over and <span class="hl">just show you.</span></p>
     </div>
   </section>
 
   <!-- 2. MEET SOFTWARE COACH -->
   <section class="meet" aria-labelledby="meet-title">
-    <div class="wrap split">
-      <div class="meet-copy">
-        <p class="eyebrow">Meet WSDA Software Coach</p>
-        <h2 id="meet-title">The expert you wish you had, <em>right beside you.</em></h2>
-        <p class="meet-line">You do it. Coach shows you how.</p>
+    <div class="wrap">
+      <div class="meet-head">
+        <h2 id="meet-title">Meet your personal software expert.</h2>
+        <p><strong>You do it. Coach shows you how.</strong> It sits beside you and shows you the way, step by step.</p>
       </div>
-      <ol class="beats">
-        <li><span class="beat-num" aria-hidden="true">i.</span><div><h3>Ask for help</h3><p>Say what you're trying to do, in your own words.</p></div></li>
-        <li><span class="beat-num" aria-hidden="true">ii.</span><div><h3>Follow along on screen</h3><p>Coach shows you where to click and what comes next.</p></div></li>
-        <li><span class="beat-num" aria-hidden="true">iii.</span><div><h3>Get it done, and get it</h3><p>Finish the task and understand how you did it.</p></div></li>
+      <ol class="steps">
+        <li>
+          <span class="step-num yellow" aria-hidden="true">1</span>
+          <h3>Ask in your own words.</h3>
+          <p>Tell Coach what you're trying to do, like you'd ask a friend who knows the app.</p>
+        </li>
+        <li>
+          <span class="step-num mint" aria-hidden="true">2</span>
+          <h3>See exactly where to go.</h3>
+          <p>Coach shows you the next step right on your screen, in the app you're already using.</p>
+        </li>
+        <li>
+          <span class="step-num peach" aria-hidden="true">3</span>
+          <h3>Do it yourself.</h3>
+          <p>You make every click, so you get it done and learn how it works along the way.</p>
+        </li>
       </ol>
     </div>
   </section>
@@ -131,30 +145,29 @@
   <!-- 3. SEE IT IN ACTION -->
   <section class="demo" id="demo" aria-labelledby="demo-title">
     <div class="wrap center">
+      <p class="script yellow-text">Don't take our word for it.</p>
       <h2 id="demo-title">See it in action.</h2>
-      <p class="lead">One real request, start to finish. About a minute.</p>
-    </div>
-    <div class="wrap wide">
-      <!--
-        FEATURED DEMO (real recording only). 45-60 s, narrated, captioned. Replace the .placeholder div with:
-          <video class="demo-video" controls preload="none" playsinline poster="/assets/software-coach/demo-poster.jpg"
-                 data-video-id="featured-demo" data-video-title="TITLE" data-video-app="APP NAME">
-            <source src="/assets/software-coach/demo.mp4" type="video/mp4" />
-            <track kind="captions" src="/assets/software-coach/demo.en.vtt" srclang="en" label="English" default />
-          </video>
-      -->
-      <figure class="frame dark demo-frame">
+      <figure class="demo-frame">
+        <!--
+          FEATURED DEMO (real recording only). 45-60 s, captioned. Replace the .placeholder div with:
+            <video class="demo-video" controls preload="none" playsinline poster="/assets/software-coach/demo-poster.jpg"
+                   data-video-id="featured-demo" data-video-title="TITLE" data-video-app="APP NAME">
+              <source src="/assets/software-coach/demo.mp4" type="video/mp4" />
+              <track kind="captions" src="/assets/software-coach/demo.en.vtt" srclang="en" label="English" default />
+            </video>
+        -->
         <div class="placeholder">
-          <svg aria-hidden="true" viewBox="0 0 80 80" width="84" height="84"><circle cx="40" cy="40" r="38" fill="#F7F3EC"/><path d="M33 26l22 14-22 14z" fill="#121A22"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 80 80" width="84" height="84"><circle cx="40" cy="40" r="38" fill="#06C015"/><path d="M33 26l22 14-22 14z" fill="#0F1923"/></svg>
           <span class="ph-label">Placeholder &middot; real demo, 45&ndash;60 seconds</span>
-          <span class="ph-title">Narrated, captioned recording from the current beta</span>
+          <span class="ph-title">One real request, start to finish, recorded in the current beta</span>
         </div>
         <figcaption class="visually-hidden">Software Coach demonstration video.</figcaption>
       </figure>
+      <p class="demo-note">With captions &middot; no sound needed</p>
 
       <!--
-        MORE DEMOS (later). To add short demos, uncomment this list and add one <li> per real recording.
-        The grid is styled (2 columns on desktop, 1 on phones) and every <video> is tracked automatically.
+        MORE DEMOS (later). Uncomment and add one <li> per real recording; styled 2-up on desktop, 1-up on phones,
+        and every <video> is tracked automatically.
         <ul class="more-demos">
           <li>
             <video controls preload="none" playsinline poster="/assets/software-coach/NAME.jpg"
@@ -169,52 +182,54 @@
     </div>
   </section>
 
-  <!-- 4. IMAGINE -->
+  <!-- 4. IMAGINE WHAT YOU COULD DO -->
   <section class="imagine" aria-labelledby="imagine-title">
     <div class="wrap">
-      <h2 id="imagine-title">Imagine&hellip;</h2>
-      <ul class="imagine-list">
-        <li><p>Your first week with new software at work, without the panic.</p><span>At work</span></li>
-        <li><p>A class project in an app you've never opened.</p><span>At school</span></li>
-        <li><p>Finally finding that one setting you always lose.</p><span>Everyday</span></li>
-        <li><p>Learning the skill you've always meant to pick up.</p><span>Learning</span></li>
+      <h2 id="imagine-title">Imagine having an expert for&hellip;</h2>
+      <ul class="stickies">
+        <li class="sticky yellow"><p class="sticky-tag">At work</p><p class="sticky-text">Your first week with new software</p></li>
+        <li class="sticky mint"><p class="sticky-tag">At school</p><p class="sticky-text">A class project in an app you've never opened</p></li>
+        <li class="sticky peach"><p class="sticky-tag">Everyday</p><p class="sticky-text">That one setting you can never find</p></li>
+        <li class="sticky blue"><p class="sticky-tag">Learning</p><p class="sticky-text">The skill you've always meant to pick up</p></li>
       </ul>
     </div>
   </section>
 
-  <!-- 5. JOIN -->
+  <!-- 5. JOIN THE FREE BETA -->
   <section class="join" id="join" aria-labelledby="join-title">
-    <div class="wrap center narrow">
-      <h2 id="join-title">Your expert is ready <em>when you are.</em></h2>
-      <p class="lead">Join the free beta and we'll email your invite.</p>
+    <div class="wrap">
+      <div class="join-panel">
+        <p class="script">Free while in beta</p>
+        <h2 id="join-title">Get your own software expert.</h2>
 
-      <!--
-        SIGNUP GATES (both must be set before any email is collected):
-          data-signups-open="true"  only after the Privacy Policy and Beta terms are final and published.
-          data-klaviyo-list         the "Software Coach Beta" list ID.
-      -->
-      <form id="beta-form" class="beta-form" novalidate
-            data-signups-open="false"
-            data-klaviyo-company="Xq8cpH"
-            data-klaviyo-list="XXXXXX">
-        <label for="beta-email" class="visually-hidden">Email address</label>
-        <div class="field-row">
-          <input type="email" id="beta-email" name="email" autocomplete="email" inputmode="email"
-                 maxlength="254" placeholder="you@example.com" required aria-describedby="beta-msg beta-note" />
-          <button type="submit" class="btn btn-primary" data-cta-id="form_submit" data-cta-location="join">Join the Free Beta</button>
-        </div>
-        <div class="hp" aria-hidden="true">
-          <label for="beta-website">Leave this field empty</label>
-          <input type="text" id="beta-website" name="website" tabindex="-1" autocomplete="off" />
-        </div>
-        <p class="form-msg" id="beta-msg" role="alert" aria-live="polite"></p>
-        <p class="mac-note" id="beta-note">Currently available for macOS beta testing.</p>
-        <p class="fine-print">We'll use your email to send your beta invite and beta updates. See the <a href="/software-coach/privacy">Privacy Policy</a> and <a href="/software-coach/beta">beta participation details</a>.</p>
-      </form>
+        <!--
+          SIGNUP GATES (both must be set before any email is collected):
+            data-signups-open="true"  only after the Privacy Policy and Beta terms are final and published.
+            data-klaviyo-list         the "Software Coach Beta" list ID.
+        -->
+        <form id="beta-form" class="beta-form" novalidate
+              data-signups-open="false"
+              data-klaviyo-company="Xq8cpH"
+              data-klaviyo-list="XXXXXX">
+          <div class="field-pill">
+            <label for="beta-email" class="visually-hidden">Email address</label>
+            <input type="email" id="beta-email" name="email" autocomplete="email" inputmode="email"
+                   maxlength="254" placeholder="you@example.com" required aria-describedby="beta-msg beta-note" />
+            <button type="submit" class="btn btn-navy" data-cta-id="form_submit" data-cta-location="join">Join the Free Beta</button>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="beta-website">Leave this field empty</label>
+            <input type="text" id="beta-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="form-msg" id="beta-msg" role="alert" aria-live="polite"></p>
+          <p class="join-mac" id="beta-note">Currently available for macOS beta testing.</p>
+          <p class="join-fine">We'll email your invite and beta updates. <a href="/software-coach/privacy">Privacy Policy</a> &middot; <a href="/software-coach/beta">Beta details</a></p>
+        </form>
 
-      <div class="form-success" id="beta-success" tabindex="-1" hidden>
-        <p class="success-title" id="beta-success-title">You're on the list.</p>
-        <p class="success-body">We'll email you when your beta invite is ready.</p>
+        <div class="form-success" id="beta-success" tabindex="-1" hidden>
+          <p class="success-title" id="beta-success-title">You're on the list.</p>
+          <p class="success-body">We'll email you when your beta invite is ready.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -223,14 +238,14 @@
 
 <footer class="site-footer">
   <div class="wrap footer-inner">
-    <a href="https://wsdalearning.ai/" class="footer-logo"><img src="/assets/software-coach/wsda-logo.png" alt="Walter Shields Data Academy home" width="114" height="48" loading="lazy" /></a>
+    <a href="https://wsdalearning.ai/" class="footer-logo"><img src="/assets/software-coach/wsda-logo-navy.png" alt="Walter Shields Data Academy home" width="90" height="38" loading="lazy" /></a>
     <ul class="footer-links">
       <li><a href="/software-coach/privacy">Privacy Policy</a></li>
       <li><a href="/software-coach/terms">Terms of Use</a></li>
       <li><a href="/software-coach/beta">Beta participation</a></li>
       <li><a href="https://wsdalearning.ai/contact">Contact</a></li>
     </ul>
-    <p class="footer-bottom">&copy; 2026 Walter Shields Data Academy</p>
+    <span class="footer-copy">&copy; 2026 Walter Shields Data Academy</span>
   </div>
 </footer>
 
