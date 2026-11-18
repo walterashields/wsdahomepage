@@ -13,6 +13,7 @@
     coach_video_complete a demo video played to the end (same parameters)
 
   Signup goes to Klaviyo's client subscriptions endpoint, list set in the form's data-klaviyo-list.
+  Nothing is sent until the form has data-signups-open="true" (set only once legal pages are final).
 */
 (function () {
   "use strict";
@@ -88,15 +89,15 @@
   });
 
   // Demo videos: any <video> on the page reports play (once) and completion. Title and app come from
-  // data attributes on the video or its carousel slide.
+  // data attributes on the video or its list item.
   Array.prototype.forEach.call(document.querySelectorAll("video"), function (v) {
     if (v.autoplay && v.muted) return; // decorative loops are not demo views
-    var slide = v.closest ? v.closest(".demo-slide") : null;
+    var slide = v.closest ? v.closest(".more-demos li") : null;
     var info = {
       video_id: v.getAttribute("data-video-id") || (slide && slide.getAttribute("data-video-id")) || "",
       video_title: v.getAttribute("data-video-title") || "",
       video_app: v.getAttribute("data-video-app") || "",
-      video_location: slide ? "carousel" : "featured"
+      video_location: slide ? "more_demos" : "featured"
     };
     var played = false, completed = false;
     v.addEventListener("play", function () {
@@ -113,36 +114,24 @@
     });
   });
 
-  // Carousel: arrows move one slide; counter and arrow state follow scrolling. Works with any number of slides.
-  var track = document.getElementById("demo-track");
-  if (track) {
-    var slidesEls = track.querySelectorAll(".demo-slide");
-    var prev = document.querySelector('.carousel-btn[data-dir="-1"]');
-    var next = document.querySelector('.carousel-btn[data-dir="1"]');
-    var count = document.querySelector(".carousel-count");
-    function step() { return slidesEls.length > 1 ? slidesEls[1].offsetLeft - slidesEls[0].offsetLeft : track.clientWidth; }
-    function update() {
-      var max = track.scrollWidth - track.clientWidth - 2;
-      var first = Math.round(track.scrollLeft / (step() || 1));
-      var visible = Math.max(1, Math.round(track.clientWidth / (step() || 1)));
-      var last = Math.min(slidesEls.length, first + visible);
-      if (prev) prev.disabled = track.scrollLeft <= 2;
-      if (next) next.disabled = track.scrollLeft >= max;
-      if (count) count.textContent = slidesEls.length > visible ? (first + 1) + (last > first + 1 ? "–" + last : "") + " of " + slidesEls.length : "";
+  // Hero loop: visible pause/play control; stays paused for visitors who prefer reduced motion.
+  var heroVideo = document.querySelector(".hero-video");
+  var toggle = document.querySelector(".video-toggle");
+  if (heroVideo && toggle) {
+    toggle.hidden = false;
+    function sync() {
+      var paused = heroVideo.paused;
+      toggle.classList.toggle("is-paused", paused);
+      toggle.setAttribute("aria-label", paused ? "Play video" : "Pause video");
     }
-    [prev, next].forEach(function (b) {
-      if (!b) return;
-      b.addEventListener("click", function () { track.scrollBy({ left: step() * Number(b.getAttribute("data-dir")), behavior: "smooth" }); });
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
+    toggle.addEventListener("click", function () {
+      if (heroVideo.paused) { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); } else { heroVideo.pause(); }
     });
-    track.addEventListener("keydown", function (e) {
-      if (e.target !== track) return;
-      if (e.key === "ArrowRight") { e.preventDefault(); track.scrollBy({ left: step(), behavior: "smooth" }); }
-      if (e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: -step(), behavior: "smooth" }); }
-    });
-    var t;
-    track.addEventListener("scroll", function () { clearTimeout(t); t = setTimeout(update, 60); }, { passive: true });
-    window.addEventListener("resize", update);
-    update();
+    heroVideo.addEventListener("play", sync);
+    heroVideo.addEventListener("pause", sync);
+    sync();
   }
 
   if (!form || !input) return;
@@ -157,6 +146,8 @@
   var company = form.getAttribute("data-klaviyo-company") || "";
   var listId = form.getAttribute("data-klaviyo-list") || "";
   var preview = form.getAttribute("data-preview") === "true";
+  // Launch gate: no email is collected until the privacy policy and beta terms are published.
+  var signupsOpen = form.getAttribute("data-signups-open") === "true";
   var configured = /^[A-Za-z0-9]{6}$/.test(company) && /^[A-Za-z0-9]{6}$/.test(listId) && !/X{4}/.test(listId);
 
   var started = false;
@@ -198,6 +189,11 @@
     if (alreadySignedUp(email)) { showSuccess("You're already on the list."); return; }
 
     if (++attempts > MAX_ATTEMPTS) { showError("Too many attempts. Please refresh the page and try again.", "rate_limited"); return; }
+
+    if (!signupsOpen && !preview) {
+      showError("Beta signups open soon. Please check back shortly.", "signups_closed");
+      return;
+    }
 
     if (!configured && !preview) {
       if (window.console) console.warn("Software Coach signup: set data-klaviyo-list on #beta-form to the beta list ID.");

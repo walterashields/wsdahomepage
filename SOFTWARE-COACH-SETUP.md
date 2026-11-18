@@ -3,7 +3,9 @@
 Page: `wsda-deploy/software-coach.html` → `https://wsdalearning.ai/software-coach`
 Assets: `wsda-deploy/assets/software-coach/` (own CSS, JS, logo copy, OG image). No existing page or asset was changed.
 
-The page is **not launch-ready until every item in section 1 is done**. Both the signup and the analytics are switched off by design until the real IDs are in place.
+The page is **not launch-ready until every item in section 1 is done**. Signup, Klaviyo and analytics are all switched off by design until then.
+
+**Signup launch gate:** the form has `data-signups-open="false"`. While it is false, no email is sent anywhere (visitors see "Beta signups open soon"). Flip it to `"true"` only after the Privacy Policy and Beta participation terms are final and published, and the Klaviyo list ID is set.
 
 ## 1. What Walter needs to provide or configure
 
@@ -14,9 +16,9 @@ The page is **not launch-ready until every item in section 1 is done**. Both the
 | 3 | **GTM container ID** (`GTM-XXXXXXX`) | tagmanager.google.com | Replace `GTM-XXXXXXX` in `software-coach.html` (2 spots). The same placeholder is still in `index.html`, `about.html`, `contact.html`, `teams.html`, `teams/thank-you.html`, so **no page on the site is measured today**. |
 | 4 | **GA4 Measurement ID** (`G-…`) | GA4 > Admin > Data streams > Web | Used by the Google tag inside GTM. |
 | 5 | **LinkedIn Insight Tag Partner ID** | Campaign Manager > Analyze > Insight Tag | Used by the LinkedIn tag inside GTM. |
-| 6 | Product footage | App Development 3 / screen recording | Hero loop, the featured 45–60 s demo, and the carousel demos (title + application name each). Replace the `data-placeholder` figures; instructions are in HTML comments. Add a carousel demo by copying one `<li class="demo-slide">`. Real recordings only, with captions. |
-| 7 | Privacy Policy, Terms of Use, Beta participation text | Legal / App Development 3 | Replace the placeholders in `software-coach/privacy.html`, `terms.html`, `beta.html`. Anything about screen data, AI processing, retention or security must be verified with App Development 3. |
-| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current, and that the four example requests in "Made for everyday moments" (first SQL query, sales report, finding settings, saving as PDF) and the chatbot comparison match the current beta. |
+| 6 | Product footage | App Development 3 / screen recording | Hero: silent 10–15 s loop, 2:1, under 2.5 MB (MP4 + WebM) plus a poster JPG under 200 KB. Featured demo: 45–60 s, narrated, captioned (.vtt). Swap-in markup is in HTML comments next to each placeholder. More short demos later: uncomment the `more-demos` list in the demo section. Real recordings only, demo data only. |
+| 7 | Privacy Policy, Terms of Use, Beta participation text | Legal / App Development 3 | The three pages under `software-coach/` are marked **Draft · not yet published** and noindex. Replace with final text; anything about screen data, AI processing, retention or security must be verified with App Development 3. Then set `data-signups-open="true"`. |
+| 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current and that the hero/"Meet" copy (ask for help, see where to click, you do the clicks) matches the current beta. |
 
 ## 2. What the page sends
 
@@ -32,11 +34,11 @@ Klaviyo keeps one profile per email, so a repeat signup does not create a duplic
 | Event | When | Parameters |
 |---|---|---|
 | `coach_page_view` | page load | `page_type`, `utm_*`, `landing_page`, `referring_url` |
-| `coach_cta_click` | any primary CTA | `cta_id` (`nav_join_beta`, `hero_join_beta`, `hero_watch_demo`, `form_submit`), `cta_text`, `cta_location` |
+| `coach_cta_click` | any primary CTA | `cta_id` (`nav_join_beta`, `hero_join_beta`, `hero_see_how`, `form_submit`), `cta_text`, `cta_location` |
 | `coach_form_start` | first interaction with the form | `form_id` |
 | `generate_lead` | **only after Klaviyo returns 2xx** | `form_id=software_coach_beta`, `lead_type=software_coach_beta`, `utm_*`, `landing_page`, `referring_url` |
-| `coach_signup_error` | a failed attempt | `error_type` (`invalid_email`, `not_configured`, `rate_limited`, `network`, `http_<status>`) |
-| `coach_video_play` | first play of a demo video | `video_id`, `video_title`, `video_app`, `video_location` (`featured` or `carousel`) |
+| `coach_signup_error` | a failed attempt | `error_type` (`signups_closed`, `invalid_email`, `not_configured`, `rate_limited`, `network`, `http_<status>`) |
+| `coach_video_play` | first play of a demo video | `video_id`, `video_title`, `video_app`, `video_location` (`featured` or `more_demos`) |
 | `coach_video_complete` | a demo video plays to the end | same as above |
 
 `generate_lead` is shared with the Teams page; tell them apart with `lead_type` (`team_pilot` vs `software_coach_beta`).
@@ -70,6 +72,7 @@ Publish, then in GTM Preview confirm: `coach_page_view` carries UTMs; `generate_
 
 ## 6. Going public (only after Walter approves)
 
+0. Legal pages final, then `data-signups-open="true"` in `software-coach.html`.
 1. `software-coach.html`: change `<meta name="robots">` to `index, follow`.
 2. `_headers`: remove the two `/software-coach` rules.
 3. Legal pages: change their robots meta to `index, follow` once the real text is in.
