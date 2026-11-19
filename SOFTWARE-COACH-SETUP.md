@@ -5,7 +5,13 @@ Assets: `wsda-deploy/assets/software-coach/` (own CSS, JS, logo copy, OG image).
 
 The page is **not launch-ready until every item in section 1 is done**. Signup, Klaviyo and analytics are all switched off by design until then.
 
-**Signup launch gate:** the form has `data-signups-open="false"`. While it is false, no email is sent anywhere (visitors see "Beta signups open soon"). Flip it to `"true"` only after the Privacy Policy and Beta participation terms are final and published, and the Klaviyo list ID is set.
+**0.2.7 self-service: the app is the sign-up.** The join section's main action is now **Download free for Mac** (`#mac-download`). Customers create their account inside the app (email and a one-time code), accept the Terms and the AI Data Statement there, and get their free trial. This page collects no email for that.
+
+**Download launch gate:** `#mac-download` has `data-downloads-open="false"` and an empty `data-download-url`. While closed, clicking it shows "The free beta download opens soon" and fires `coach_download_error` (`error_type=downloads_closed`); nothing is downloaded. Open it only after (1) the legal pages are approved and published, (2) public sign-up is approved, and (3) the download address exists: set `data-download-url` to the WSDA download Worker's address (https only), then `data-downloads-open="true"`. The page then links straight to the DMG and fires `coach_download_click`.
+
+**The email form is now an optional updates list,** separate from the app: "Not ready to install? Get Software Coach news by email." It never creates an account.
+
+**Signup launch gate (updates list):** the form has `data-signups-open="false"`. While it is false, no email is sent anywhere (visitors see "Beta signups open soon"). Flip it to `"true"` only after the Privacy Policy and Beta participation terms are final and published, and the Klaviyo list ID is set.
 
 ## 1. What Walter needs to provide or configure
 
@@ -17,7 +23,7 @@ The page is **not launch-ready until every item in section 1 is done**. Signup, 
 | 4 | **GA4 Measurement ID** (`G-…`) | GA4 > Admin > Data streams > Web | Used by the Google tag inside GTM. |
 | 5 | **LinkedIn Insight Tag Partner ID** | Campaign Manager > Analyze > Insight Tag | Used by the LinkedIn tag inside GTM. |
 | 6 | Product footage | App Development 3 / screen recording | Hero: silent 8–12 s loop, 16:10, under 2.5 MB (MP4 + WebM) plus a poster JPG under 200 KB. Featured demo: 45–60 s, narrated, captioned (.vtt). Swap-in markup is in HTML comments next to each placeholder. More short demos later: uncomment the `more-demos` list in the demo section. Real recordings only, demo data only. |
-| 7 | Privacy Policy, Terms of Use, Beta participation text | Legal / App Development 3 | The three pages under `software-coach/` are marked **Draft · not yet published** and noindex. Replace with final text; anything about screen data, AI processing, retention or security must be verified with App Development 3. Then set `data-signups-open="true"`. |
+| 7 | Privacy Policy, Terms of Use, **AI Data Statement**, Beta participation text | Legal / App Development 3 | `software-coach/terms.html`, `privacy.html` and the new `ai-data.html` now carry the **review drafts** generated from `docs/legal/` in `walterashields/wsda-tutor-next` (branch `dev/0.2.7-self-service`). Edit them there and regenerate; highlighted `[items]` are for WSDA or counsel. They stay marked **Draft · for review, not yet published** and noindex until counsel approves. The app links to `/software-coach/terms`, `/software-coach/ai-data` and `/software-coach/privacy`, so keep those paths. |
 | 8 | Capability confirmation | App Development 3 | Confirm macOS-only is current and that the hero/"Meet" copy and the three hero captions ("you ask", "Coach shows you where", "you've got it!") match the current beta and the final hero clip. |
 
 ## 2. What the page sends
@@ -40,6 +46,8 @@ Klaviyo keeps one profile per email, so a repeat signup does not create a duplic
 | `coach_signup_error` | a failed attempt | `error_type` (`signups_closed`, `invalid_email`, `not_configured`, `rate_limited`, `network`, `http_<status>`) |
 | `coach_video_play` | first play of a demo video | `video_id`, `video_title`, `video_app`, `video_location` (`featured` or `more_demos`) |
 | `coach_video_complete` | a demo video plays to the end | same as above |
+| `coach_download_click` | the Mac download starts (downloads open) | `platform=mac` |
+| `coach_download_error` | the download button is pressed while downloads are closed | `error_type=downloads_closed` |
 
 `generate_lead` is shared with the Teams page; tell them apart with `lead_type` (`team_pilot` vs `software_coach_beta`).
 
@@ -72,7 +80,7 @@ Publish, then in GTM Preview confirm: `coach_page_view` carries UTMs; `generate_
 
 ## 6. Going public (only after Walter approves)
 
-0. Legal pages final, then `data-signups-open="true"` in `software-coach.html`.
+0. Legal pages approved and published; public sign-up approved; the download Worker live. Then set `data-download-url` and `data-downloads-open="true"` on `#mac-download`, and (for the updates list) `data-signups-open="true"` with the Klaviyo list ID.
 1. `software-coach.html`: change `<meta name="robots">` to `index, follow`.
 2. `_headers`: remove the two `/software-coach` rules.
 3. Legal pages: change their robots meta to `index, follow` once the real text is in.

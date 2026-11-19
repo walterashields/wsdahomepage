@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRAFT: AI Data Statement | WSDA Software Coach</title>
+  <!-- DRAFT FOR REVIEW, NOT PUBLISHED. Generated from docs/legal/ai-data-statement.md in walterashields/wsda-tutor-next
+       (branch dev/0.2.7-self-service); edit there and regenerate. Highlighted [items] are for WSDA or counsel.
+       Keep noindex and the draft banner until counsel has approved the text. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="/assets/software-coach/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Caveat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/software-coach/coach.css" />
+</head>
+<body>
+<header class="site-nav">
+  <a href="https://wsdalearning.ai/" class="nav-logo"><img src="/assets/software-coach/wsda-logo-navy.png" alt="Walter Shields Data Academy home" width="110" height="46" /></a>
+  <a href="/software-coach" class="btn btn-navy btn-sm">Software Coach</a>
+</header>
+<main id="main">
+  <section class="legal">
+    <div class="wrap legal-body">
+      <p class="draft-banner">Draft &middot; for review, not yet published</p>
+      <h1>AI Data Statement</h1>
+      <p><strong>Version 1 · Effective <mark class="review">[date of publication]</mark></strong></p>
+      <p>This statement explains, in plain terms, what WSDA Software Coach sends to an AI model while it coaches you, who processes it, and what is kept. It is part of the <a href="/software-coach/privacy">Privacy Policy</a> and the <a href="/software-coach/terms">Terms of Use</a>. You accept it when you start using the Coach.</p>
+      <h2>What the Coach does</h2>
+      <p>The Coach watches the application you ask for help with and tells you, one step at a time, what to click or type next. To do that it has to look at your screen. It does this with an AI model, which runs on servers outside your Mac.</p>
+      <h2>What is sent each time the Coach looks</h2>
+      <p>Each time the Coach checks your progress (when you start a task, when you act, or when you press <strong>Look again</strong> or <strong>I'm stuck</strong>), it sends the following, through WSDA's service, to the AI model:</p>
+      <ol><li><strong>A screenshot</strong> of the application you're working in: its front window, its open menus or pop-ups, and the menu bar. The Coach's own window is never captured. Anything else on screen that overlaps that area can appear in the screenshot.</li><li><strong>The text of the controls on that screen</strong> as macOS Accessibility reports them, for example button names, menu items, labels and, where the application exposes it, the text shown in fields.</li><li><strong>The application's name, the window title</strong> and, in a web browser, <strong>the address of the page</strong>.</li><li><strong>Your task</strong> in your own words, your answers to the Coach's questions, and anything you add when you ask for help.</li><li><strong>What the Coach has already told you</strong> in this task, as text, and what it noticed you did (for example which button your last click landed on).</li></ol>
+      <p><strong>Screenshots are not kept between checks.</strong> Each one is sent once and then discarded on your Mac. Earlier steps are sent again only as text.</p>
+      <p><strong>What is never sent:</strong> files you haven't opened on screen, other applications' windows (beyond overlap as described above), your keystrokes outside the Coach, your microphone or camera, or your Mac's identity beyond a random installation number used for sign-in.</p>
+      <h2>Who processes it</h2>
+      <ul><li><strong>WSDA's access service</strong> (hosted on Cloudflare) passes the request to the AI model. It checks your account, your trial and the request's size and cost. <strong>It does not store screenshots, screen text, your task or the Coach's answers.</strong> It records only usage information: when a request was made, how long it took, its size in tokens, its cost, and whether it succeeded.</li><li><strong>The AI model is provided by Anthropic</strong> (Claude), under Anthropic's commercial terms for business customers. <strong><mark class="review">[Counsel to confirm against Anthropic's current commercial terms and data processing addendum: whether API inputs and outputs are used to train models, and for how long Anthropic keeps them for safety and abuse monitoring.]</mark></strong></li></ul>
+      <h2>Be careful with what's on screen</h2>
+      <p>Because the Coach sees what you see in the application you're working in, <strong>close or hide anything you don't want sent</strong> before you start a task, such as passwords, health or financial details, or other people's personal information. Press <strong>Stop</strong> at any time: the Coach then stops looking at once.</p>
+      <h2>Your choices</h2>
+      <ul><li><strong>Stop</strong> ends a task and stops all screen checks.</li><li>You can <strong>sign out</strong> at any time, or <strong>delete your account</strong> from <strong>Account…</strong> in the Coach. See the Privacy Policy for what deletion removes.</li><li>You can <strong>turn off Screen Recording</strong> for the Coach in macOS System Settings at any time. The Coach can't work without it, and asks again.</li></ul>
+      <h2>Changes</h2>
+      <p>If we change what the Coach sends or who processes it, we'll publish a new version of this statement and the Coach will ask you to accept it before it continues.</p>
+      <h2>Contact</h2>
+      <p><mark class="review">[WSDA contact email]</mark> · Walter Shields Data Academy, <mark class="review">[postal address]</mark></p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <a href="https://wsdalearning.ai/" class="footer-logo"><img src="/assets/software-coach/wsda-logo-navy.png" alt="Walter Shields Data Academy home" width="90" height="38" loading="lazy" /></a>
+    <ul class="footer-links">
+      <li><a href="/software-coach/privacy">Privacy Policy</a></li>
+      <li><a href="/software-coach/terms">Terms of Use</a></li>
+      <li><a href="/software-coach/ai-data">AI Data Statement</a></li>
+      <li><a href="/software-coach/beta">Beta participation</a></li>
+      <li><a href="https://wsdalearning.ai/contact">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2026 Walter Shields Data Academy</span>
+  </div>
+</footer>
+</body>
+</html>

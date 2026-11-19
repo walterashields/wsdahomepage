@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DRAFT: Privacy Policy | WSDA Software Coach</title>
-  <!-- DRAFT, NOT PUBLISHED. Replace with the approved privacy policy before launch. Anything about screen data,
-       AI processing, retention or security must be verified with App Development 3 first.
-       Keep noindex until the final text is approved. Beta signups stay closed (data-signups-open="false"
-       in software-coach.html) until this page and the privacy policy are final. -->
+  <!-- DRAFT FOR REVIEW, NOT PUBLISHED. Generated from docs/legal/privacy-policy.md in walterashields/wsda-tutor-next
+       (branch dev/0.2.7-self-service); edit there and regenerate. Highlighted [items] are for WSDA or counsel.
+       Keep noindex and the draft banner until counsel has approved the text. -->
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="/assets/software-coach/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,11 +21,34 @@
 </header>
 <main id="main">
   <section class="legal">
-    <div class="wrap">
-      <p class="draft-banner">Draft &middot; not yet published</p>
+    <div class="wrap legal-body">
+      <p class="draft-banner">Draft &middot; for review, not yet published</p>
       <h1>Privacy Policy</h1>
-      <p class="lead">The Software Coach privacy policy is being finalized. It will be published here before beta signups open.</p>
-      <p class="lead">Questions in the meantime? <a href="https://wsdalearning.ai/contact">Contact us</a>.</p>
+      <p><strong>Effective <mark class="review">[date of publication]</mark></strong></p>
+      <p>This policy explains what personal information WSDA Software Coach collects, why, how long it is kept and the choices you have. "WSDA", "we" and "us" mean Walter Shields Data Academy, <mark class="review">[legal entity and postal address]</mark>. Questions: <mark class="review">[WSDA contact email]</mark>.</p>
+      <p>What the Coach sends to its AI model while it coaches you is described in detail in the <strong><a href="/software-coach/ai-data">AI Data Statement</a></strong>, which is part of this policy.</p>
+      <h2>1. What we collect</h2>
+      <div class="legal-table"><table><thead><tr><th>What</th><th>Why</th><th>How long</th></tr></thead><tbody><tr><td><strong>Your email address</strong></td><td>To sign you in with a one-time code, and to recognise your account</td><td>Until you delete your account</td></tr><tr><td><strong>Sign-in codes</strong> (stored only as a keyed fingerprint, never as the code)</td><td>To check the code you enter</td><td>Expire after 10 minutes; removed within a day</td></tr><tr><td><strong>Sign-in sessions</strong> (a fingerprint of the token on your Mac, the Mac's random installation number, when it was created and last used)</td><td>To keep you signed in, on at most 3 Macs</td><td>Until you sign out, or 60 days without use (180 days at most); removed 30 days later</td></tr><tr><td><strong>Your acceptance of the Terms and the AI Data Statement</strong> (which version, when, and the app version)</td><td>To show you agreed, as required to provide the service</td><td>Kept as long as needed to demonstrate consent, also after deletion (then linked only to an anonymous account number) <mark class="review">[counsel to confirm the period]</mark></td></tr><tr><td><strong>Your marketing choice</strong> (yes or no, and when)</td><td>To email you news and offers only if you chose to</td><td>Until you change it or delete your account</td></tr><tr><td><strong>Your free trial</strong> (its size, what's used)</td><td>To provide the trial</td><td>Until you delete your account (see section 4)</td></tr><tr><td><strong>Usage records</strong> (when each AI request was made, how long it took, its size in tokens, its cost and whether it worked)</td><td>To run the trial and spending limits, find faults and see how the Coach is used</td><td>90 days</td></tr><tr><td><strong>Network address</strong></td><td>To limit abuse (for example too many code requests)</td><td>Not stored as such; used only in keyed, daily-changing fingerprints that expire within 2 days</td></tr></tbody></table></div>
+      <p><strong>We do not store your screenshots, the text on your screen, your tasks or the Coach's answers.</strong> They pass through our service to the AI model and are not kept by us. See the AI Data Statement.</p>
+      <p><strong>On your Mac</strong>, the Coach keeps your sign-in token (encrypted with your login Keychain), your email address, a random installation number, your settings, and a local log of technical events. The log contains no screenshots, typed text or task content. None of this leaves your Mac except as described here. You can delete it by removing the Coach together with its folders <code>~/Library/Application Support/WSDA Live Tutor</code> and <code>~/Library/Logs/WSDA Live Tutor</code>.</p>
+      <h2>2. Who we share it with</h2>
+      <p>We use these service providers, only to provide the Coach:</p>
+      <div class="legal-table"><table><thead><tr><th>Provider</th><th>What they do</th><th>What they receive</th></tr></thead><tbody><tr><td><strong>Cloudflare</strong></td><td>Hosts our service and its database</td><td>Everything in section 1, stored in their database</td></tr><tr><td><strong>Anthropic</strong></td><td>Provides the AI model</td><td>What the AI Data Statement lists, for each check</td></tr><tr><td><strong>Resend</strong></td><td>Sends the sign-in and account emails</td><td>Your email address and the email's content (the code)</td></tr><tr><td><strong>Klaviyo</strong> (only if you chose WSDA news)</td><td>Sends WSDA's marketing email</td><td>Your email address and when you opted in</td></tr></tbody></table></div>
+      <p>We don't sell your personal information, and we don't share it for advertising. We may disclose information if the law requires it. <mark class="review">[Counsel: add international transfer wording and safeguards as applicable.]</mark></p>
+      <h2>3. Marketing email</h2>
+      <p>Marketing email is <strong>separate from using the Coach and off unless you choose it</strong>. You can choose it when you accept the terms, or later under your account in the Coach. You can turn it off there at any time, or use the unsubscribe link in any marketing email. Sign-in codes and account emails are not marketing and are sent regardless.</p>
+      <h2>4. Deleting your account</h2>
+      <p>You can delete your account in the Coach (<strong>Account… → Delete my account</strong>), confirmed with a code sent to your email. Deletion at once:</p>
+      <ul><li>removes your email address, sign-in sessions, installations, marketing choice and pending codes;</li><li>signs you out on every Mac;</li><li>unlinks your usage records from you (they are then anonymous, and expire as above).</li></ul>
+      <p>To prevent repeated free trials, we keep <strong>only a keyed fingerprint of your email address together with how much of your free trial was left</strong>, for 12 months. The fingerprint can't be turned back into your address. If you sign up again with the same address within that time, your trial continues from where it was instead of starting again. Records of your acceptance of the terms are kept as described in section 1, linked only to an anonymous number.</p>
+      <h2>5. Your rights</h2>
+      <p>You can ask us for a copy of your information, to correct it, or to delete it, by writing to <mark class="review">[WSDA contact email]</mark>. <mark class="review">[Counsel: list the rights and the authority to complain to that apply to WSDA's customers, and the legal bases for each purpose in section 1: contract (sign-in, trial, consent records), legitimate interests (abuse prevention, fault-finding), consent (marketing).]</mark></p>
+      <h2>6. Security</h2>
+      <p>Sign-in codes, tokens and network addresses are stored only as keyed fingerprints. Tokens on your Mac are encrypted. Our service holds the AI provider's key, so it is never on your Mac. Administrative access is limited to WSDA staff through Cloudflare's own sign-in.</p>
+      <h2>7. Children</h2>
+      <p>The Coach is not intended for children under <mark class="review">[13/16]</mark>, and we don't knowingly collect their information.</p>
+      <h2>8. Changes</h2>
+      <p>We'll post any changes here with a new effective date. If they affect what the Coach sends to its AI model, the Coach will ask you to accept the new AI Data Statement first.</p>
     </div>
   </section>
 </main>
@@ -36,6 +58,7 @@
     <ul class="footer-links">
       <li><a href="/software-coach/privacy">Privacy Policy</a></li>
       <li><a href="/software-coach/terms">Terms of Use</a></li>
+      <li><a href="/software-coach/ai-data">AI Data Statement</a></li>
       <li><a href="/software-coach/beta">Beta participation</a></li>
       <li><a href="https://wsdalearning.ai/contact">Contact</a></li>
     </ul>

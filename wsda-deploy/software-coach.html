@@ -47,7 +47,7 @@
   </a>
   <div class="nav-right">
     <span class="nav-pill">Free beta for macOS</span>
-    <a href="#join" class="btn btn-navy btn-sm" data-cta-id="nav_join_beta" data-cta-location="nav">Join the Free Beta</a>
+    <a href="#join" class="btn btn-navy btn-sm" data-cta-id="nav_join_beta" data-cta-location="nav">Get the Free Beta</a>
   </div>
 </header>
 
@@ -60,7 +60,7 @@
       <p class="hero-p">You're in an app. You're trying to get something done. And you can't figure out where to go next.</p>
       <p class="hero-p"><strong>Meet WSDA Software Coach.</strong> Your personal software expert, right beside you. Ask for help, and Coach guides you through the steps, right on your screen.</p>
       <div class="actions">
-        <a href="#join" class="btn btn-green" data-cta-id="hero_join_beta" data-cta-location="hero">Join the Free Beta</a>
+        <a href="#join" class="btn btn-green" data-cta-id="hero_join_beta" data-cta-location="hero">Get the Free Beta</a>
         <a href="#demo" class="btn btn-white" data-cta-id="hero_see_how" data-cta-location="hero">
           <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 8.5l5.5 3.5-5.5 3.5z" fill="currentColor"/></svg>
           See how it works
@@ -203,7 +203,26 @@
         <h2 id="join-title">Get your own software expert.</h2>
 
         <!--
-          SIGNUP GATES (both must be set before any email is collected):
+          DOWNLOAD GATE (0.2.7 self-service): the Mac app is the sign-up. Customers download it, then sign in
+          inside the app with their email and a one-time code; the free trial starts there, after they accept
+          the Terms and the AI Data Statement. No email is collected on this page for that.
+            data-downloads-open="true"  only after the legal pages are published and public sign-up is approved.
+            data-download-url           the download address (the WSDA download Worker; https only).
+        -->
+        <div class="download" id="download">
+          <a id="mac-download" class="btn btn-navy btn-download" href="#join"
+             data-downloads-open="false"
+             data-download-url=""
+             data-cta-id="download_mac" data-cta-location="join">Download free for Mac</a>
+          <p class="join-mac">For macOS 14 or later. Open the app and sign in with your email to start your free trial. No card needed.</p>
+          <p class="form-msg" id="download-msg" role="status" aria-live="polite"></p>
+          <p class="join-fine"><a href="/software-coach/terms">Terms of Use</a> &middot; <a href="/software-coach/ai-data">AI Data Statement</a> &middot; <a href="/software-coach/privacy">Privacy Policy</a></p>
+        </div>
+
+        <p class="join-or">Not ready to install? Get Software Coach news by email.</p>
+
+        <!-- Optional updates list (separate from the app's sign-up; never used to create accounts).
+          Its SIGNUP GATES (both must be set before any email is collected):
             data-signups-open="true"  only after the Privacy Policy and Beta terms are final and published.
             data-klaviyo-list         the "Software Coach Beta" list ID.
         -->
@@ -215,20 +234,19 @@
             <label for="beta-email" class="visually-hidden">Email address</label>
             <input type="email" id="beta-email" name="email" autocomplete="email" inputmode="email"
                    maxlength="254" placeholder="you@example.com" required aria-describedby="beta-msg beta-note" />
-            <button type="submit" class="btn btn-navy" data-cta-id="form_submit" data-cta-location="join">Join the Free Beta</button>
+            <button type="submit" class="btn btn-navy" data-cta-id="form_submit" data-cta-location="join">Keep me posted</button>
           </div>
           <div class="hp" aria-hidden="true">
             <label for="beta-website">Leave this field empty</label>
             <input type="text" id="beta-website" name="website" tabindex="-1" autocomplete="off" />
           </div>
           <p class="form-msg" id="beta-msg" role="alert" aria-live="polite"></p>
-          <p class="join-mac" id="beta-note">Currently available for macOS beta testing.</p>
-          <p class="join-fine">We'll email your invite and beta updates. <a href="/software-coach/privacy">Privacy Policy</a> &middot; <a href="/software-coach/beta">Beta details</a></p>
+          <p class="join-fine" id="beta-note">Occasional emails about Software Coach. Unsubscribe any time. <a href="/software-coach/privacy">Privacy Policy</a> &middot; <a href="/software-coach/beta">Beta details</a></p>
         </form>
 
         <div class="form-success" id="beta-success" tabindex="-1" hidden>
           <p class="success-title" id="beta-success-title">You're on the list.</p>
-          <p class="success-body">We'll email you when your beta invite is ready.</p>
+          <p class="success-body">We'll email you Software Coach news and updates.</p>
         </div>
       </div>
     </div>
@@ -242,6 +260,7 @@
     <ul class="footer-links">
       <li><a href="/software-coach/privacy">Privacy Policy</a></li>
       <li><a href="/software-coach/terms">Terms of Use</a></li>
+      <li><a href="/software-coach/ai-data">AI Data Statement</a></li>
       <li><a href="/software-coach/beta">Beta participation</a></li>
       <li><a href="https://wsdalearning.ai/contact">Contact</a></li>
     </ul>

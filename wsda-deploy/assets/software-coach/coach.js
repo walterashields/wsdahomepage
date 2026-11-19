@@ -11,6 +11,8 @@
     coach_signup_error   a signup attempt failed (error_type only)
     coach_video_play     first play of a demo video (video_id, video_title, video_app, video_location)
     coach_video_complete a demo video played to the end (same parameters)
+    coach_download_click the Mac download was started (only while downloads are open)
+    coach_download_error the download button was pressed while downloads are closed (error_type only)
 
   Signup goes to Klaviyo's client subscriptions endpoint, list set in the form's data-klaviyo-list.
   Nothing is sent until the form has data-signups-open="true" (set only once legal pages are final).
@@ -83,10 +85,28 @@
       cta_text: (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 100),
       cta_location: el.getAttribute("data-cta-location") || ""
     });
-    if (el.getAttribute("href") === "#join" && input && !form.hidden) {
-      setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 450);
+    if (el.getAttribute("href") === "#join" && el.id !== "mac-download") {
+      var target = document.getElementById("mac-download") || input;
+      if (target) setTimeout(function () { try { target.focus({ preventScroll: true }); } catch (err) { target.focus(); } }, 450);
     }
   });
+
+  // Mac download (0.2.7): the app is the sign-up. Gate: data-downloads-open="true" and an https download URL.
+  var download = document.getElementById("mac-download");
+  if (download) {
+    var downloadUrl = download.getAttribute("data-download-url") || "";
+    var downloadsOpen = download.getAttribute("data-downloads-open") === "true" && /^https:\/\/[^\s"']+$/.test(downloadUrl);
+    if (downloadsOpen) download.setAttribute("href", downloadUrl);
+    download.addEventListener("click", function (e) {
+      if (downloadsOpen) {
+        dl.push({ event: "coach_download_click", platform: "mac" });
+        return;
+      }
+      e.preventDefault();
+      document.getElementById("download-msg").textContent = "The free beta download opens soon. Please check back shortly.";
+      dl.push({ event: "coach_download_error", error_type: "downloads_closed" });
+    });
+  }
 
   // Demo videos: any <video> on the page reports play (once) and completion. Title and app come from
   // data attributes on the video or its list item.
