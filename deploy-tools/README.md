@@ -26,7 +26,7 @@ The build copies every production file unchanged and adds only `software-coach.h
 `assets/software-coach/` and the noindex `_headers` rules. It writes `wsda-pages-package-MANIFEST.tsv`
 (unchanged / new + SHA-256) and refuses (`NOT READY`) if a production file would change or go missing, a redirect
 would catch `/software-coach`, a page lacks the production GTM container, injected markup is present, a file is
-over 25 MiB, or any gate is open (downloads, download address, updates list, drafts noindex).
+over 25 MiB, or any gate is open: downloads open, a download address other than `https://download.wsdalearning.ai/mac/latest`, the updates list open, a Software Coach page without noindex, or a legal page that is not the generated version or carries an unconfirmed fact.
 
 ## 3. Preview (never production)
 

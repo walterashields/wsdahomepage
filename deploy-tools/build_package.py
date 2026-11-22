@@ -12,6 +12,8 @@ import argparse, hashlib, os, re, shutil, sys
 
 OVERLAY_PREFIXES = ("software-coach.html", "software-coach/", "assets/software-coach/")
 LIVE_GTM = "GTM-W9KRWMZ8"
+APPROVED_DOWNLOAD = "https://download.wsdalearning.ai/mac/latest"
+LEGAL_PAGES = ("software-coach/terms.html", "software-coach/privacy.html", "software-coach/ai-data.html")
 MAX_BYTES = 25 * 1024 * 1024
 INJECTED = ("__cf_email__", "/cdn-cgi/l/email-protection", "cloudflareinsights", "rocket-loader")
 
@@ -140,7 +142,10 @@ def build(base, overlay, out):
     dl, form = tag("mac-download"), tag("beta-form")
     checks = {
         "downloads closed (data-downloads-open=false)": bool(dl) and 'data-downloads-open="false"' in dl.group(0),
-        "no download address set": bool(dl) and 'data-download-url=""' in dl.group(0),
+        # Launch integration: the address may be set in advance, but only to the approved download Worker URL;
+        # the button stays inert while data-downloads-open is "false" (checked above).
+        f"download address empty or exactly {APPROVED_DOWNLOAD}": bool(dl) and re.search(r'data-download-url="([^"]*)"', dl.group(0)) is not None
+            and re.search(r'data-download-url="([^"]*)"', dl.group(0)).group(1) in ("", APPROVED_DOWNLOAD),
         "updates list closed (data-signups-open=false)": bool(form) and 'data-signups-open="false"' in form.group(0),
         "no account sign-up link on the page": not re.search(r"href=\"[^\"]*(signup|sign-up|register|/account)[^\"]*\"", sc, re.I),
         "software-coach.html noindex": 'name="robots" content="noindex' in sc,
@@ -149,7 +154,13 @@ def build(base, overlay, out):
     for rel in fp:
         if rel.startswith("software-coach/") and rel.endswith(".html"):
             t = text(fp[rel])
-            checks[f"{rel} noindex + marked draft"] = 'name="robots" content="noindex' in t and "draft" in t.lower()
+            # The legal pages are generated from docs/legal (wsda-tutor-next) by build-pages.mjs: until launch they keep
+            # noindex, and none may carry an unconfirmed fact. Any other page under software-coach/ must say draft.
+            if rel in LEGAL_PAGES:
+                checks[f"{rel} noindex + generated + no unconfirmed fact"] = ('name="robots" content="noindex' in t
+                    and "docs/legal/build-pages.mjs" in t and "[to be confirmed" not in t and "draft-banner" not in t)
+            else:
+                checks[f"{rel} noindex + marked draft"] = 'name="robots" content="noindex' in t and "draft" in t.lower()
     for k, ok in checks.items():
         if not ok:
             problems.append("gate/check failed: " + k)
