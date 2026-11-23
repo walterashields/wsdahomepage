@@ -163,6 +163,8 @@ a:hover { color: var(--green-dark); }
 .form-msg { min-height: 1.5rem; margin-top: 12px; font-size: 16px; font-weight: 700; color: var(--ink); }
 .join-mac { margin-top: 6px; font-size: 15px; font-weight: 500; }
 .join-fine { margin-top: 8px; font-size: 14px; }
+.join-steps { margin: 18px auto 0; max-width: 560px; padding-left: 22px; text-align: left; font-size: 15px; line-height: 1.5; }
+.join-steps li + li { margin-top: 6px; }
 .join-fine a { color: var(--ink); }
 .download { margin: 38px auto 0; max-width: 560px; }
 .btn-download { min-height: 60px; padding: 0 36px; font-size: 18px; }
